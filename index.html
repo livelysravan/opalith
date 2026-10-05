@@ -24,17 +24,17 @@ nav a:hover{opacity:1}
 @keyframes dr{to{stroke-dashoffset:0}}
 .hero .lb{position:absolute;left:0;right:0;text-align:center;top:calc(50% - 38px + min(72vw,900px)*.0645 + 56px);opacity:0;animation:fi 1.6s 2.2s forwards}
 @keyframes fi{to{opacity:.6}}
-.draw{height:240vh;position:relative;margin-top:-35vh;margin-bottom:-26vh}
-.st{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px;padding:0 5vw}
-.st svg{width:min(92vw,1100px);height:auto;overflow:visible;opacity:.9}
-.story{position:relative;width:min(92vw,1100px);height:150px}
+.draw{height:240vh;position:relative;margin-top:-35vh}
+.st{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px;padding:0 5vw}
+.st svg{width:min(92vw,1100px,calc((100vh - 310px)*2.3));height:auto;overflow:visible;opacity:.9}
+.story{position:relative;width:min(92vw,1100px);height:130px}
 .sx{position:absolute;inset:0;opacity:0;will-change:opacity,transform}
-.sx p{margin-top:18px;font-size:clamp(20px,2.5vw,36px);font-weight:200;line-height:1.35;max-width:24ch;letter-spacing:-.005em}
-@media(max-width:700px){.story{height:170px}.st{gap:28px}}
-#a{padding-top:90px}
+.sx p{margin-top:18px;font-size:clamp(20px,2.1vw,30px);font-weight:200;line-height:1.35;max-width:40ch;letter-spacing:-.005em}
+@media(max-width:700px){.story{height:150px}.st{gap:28px}}
+#a{padding-top:80px}@media(max-width:700px){#a{padding-top:40px}}
 #ln path{stroke-dasharray:1;stroke-dashoffset:1}
-section{padding:180px 5vw;max-width:1400px;margin:auto}
-@media(max-width:800px){section{padding:110px 6vw}}
+section{padding:100px 5vw;max-width:1400px;margin:auto}
+@media(max-width:800px){section{padding:64px 6vw}}
 .stmt{font-size:clamp(28px,4.2vw,64px);font-weight:200;line-height:1.28;letter-spacing:-.005em;max-width:20ch}
 .two{display:grid;grid-template-columns:1fr 2fr;gap:6vw}
 @media(max-width:800px){.two{grid-template-columns:1fr;gap:40px}}
@@ -47,10 +47,15 @@ section{padding:180px 5vw;max-width:1400px;margin:auto}
 .pair .fr{aspect-ratio:auto;min-height:340px;margin:0}
 @media(max-width:800px){.pair{grid-template-columns:1fr}.fr{aspect-ratio:4/3}}
 .note{margin-top:26px;font-size:12px;color:var(--mut);letter-spacing:.06em}
-.cols{display:grid;grid-template-columns:repeat(4,1fr);margin-top:90px}
-.cols div{border-top:1px solid var(--line);padding:30px 32px 0 0}
+.cols{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px}
+.cols>div:not(.lift){border-top:1px solid var(--line);padding:30px 32px 0 0}
 .cols h3{font-size:26px;font-weight:200;margin:22px 0 14px}
 .cols p{font-size:14px;color:#9a9a9a;max-width:26ch}
+.lift{display:none}
+@media(max-width:700px){
+.cols{position:relative}
+.cols>div:not(.lift){padding-right:84px}
+}
 @media(max-width:800px){.cols{grid-template-columns:1fr;gap:56px}}
 form{display:grid;gap:40px;max-width:560px}
 input,textarea{font:inherit;font-weight:200;background:none;border:0;border-bottom:1px solid var(--line);padding:14px 0;color:#fff;outline:0;border-radius:0;letter-spacing:.04em}
@@ -141,6 +146,8 @@ if(t>0){hl.style.animation='none';hl.style.opacity=.6*(1-Math.min(1,t*2.5))}
 wm.style.pointerEvents=t>.9?'auto':'none';wm.style.cursor=t>.9?'pointer':'default'}
 wm.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'})});
 addEventListener('resize',function(){geo();mo()});addEventListener('scroll',mo,{passive:true});geo();mo();
+function tight(){var st=dr.querySelector('.st'),sy=dr.querySelector('.story'),lp=sy.querySelector('.sx:last-child p'),bl=st.offsetHeight-(sy.getBoundingClientRect().top-st.getBoundingClientRect().top+lp.offsetTop+lp.offsetHeight);dr.style.marginBottom=-Math.max(0,bl-6)+'px'}
+addEventListener('resize',tight);addEventListener('load',tight);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tight);tight();
 var io=new IntersectionObserver(function(e){e.forEach(function(n){if(n.isIntersecting)n.target.classList.add('on')})},{threshold:.12});
 document.querySelectorAll('.rv').forEach(function(n){io.observe(n)});
 </script>

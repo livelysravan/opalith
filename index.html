@@ -138,7 +138,12 @@ addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd
 var wm=document.querySelector('svg.big'),mL=document.getElementById('mL'),mR=document.getElementById('mR'),hl=document.querySelector('.hero .lb'),G={};
 function geo(){var vw=innerWidth,vh=innerHeight,W0=Math.min(vw*.72,900),h0=W0*140/1086,l=(vw-W0)/2,t=vh/2-38-h0/2;
 wm.style.width=W0+'px';wm.style.left=l+'px';wm.style.top=t+'px';G.sx=l+.391*W0;G.sy=t+.529*h0;
-G.s=22*1086/(120*W0);G.ex=vw*.05+W0*123/1086*G.s/2;G.ey=(parseFloat(getComputedStyle(document.documentElement).paddingTop)||0)+39}
+G.s=22*1086/(120*W0);
+var nav=document.querySelector('nav'),links=nav.querySelectorAll('a'),last=links[links.length-1];
+var nr=nav.getBoundingClientRect(),lr=last.getBoundingClientRect();
+G.ex=lr.left+(lr.width*123/1086*G.s)/2;
+G.ey=nr.top+nr.height/2;
+}
 function mo(){var t=Math.min(1,Math.max(0,scrollY/(innerHeight*.55))),e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 wm.style.transform='translate('+(G.ex-G.sx)*e+'px,'+(G.ey-G.sy)*e+'px) scale('+(1+(G.s-1)*e)+')';
 var o=1-Math.min(1,t/.5);mL.style.transform='translateX('+268*e+'px)';mR.style.transform='translateX('+-397*e+'px)';mL.style.opacity=o;mR.style.opacity=o;
